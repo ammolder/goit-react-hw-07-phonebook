@@ -1,16 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
 // Імпортуємо генератор екшену
-import { deleteContacts } from 'redux/contactsSlice';
-import { getContacts, getFilter } from 'redux/selectors';
-import { Button } from './Contacts.styled.js';
-// import { getFilters } from 'redux/filterSlice.js';
-// import { getContact } from 'redux/contactsSlice';
+import { selectContacts, selectFilter } from 'redux/selectors';
+
+import { deleteContact } from 'redux/operations';
+
+import { Button } from './ContactsList.styled.js';
 
 export const Contacts = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
-  const handleDelete = id => dispatch(deleteContacts(id));
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
+
+  const handleDelete = id => dispatch(deleteContact(id));
 
   const filterContacts = () => {
     const normalizedFilter = filter.toLowerCase();
@@ -21,9 +22,9 @@ export const Contacts = () => {
   const visibleContacts = filterContacts();
   return (
     <ul>
-      {visibleContacts.map(({ id, name, number }) => (
+      {visibleContacts.map(({ id, name, phone }) => (
         <li key={id}>
-          {name}: {number}
+          {name}: {phone}
           <Button
             type="button"
             onClick={() => {
