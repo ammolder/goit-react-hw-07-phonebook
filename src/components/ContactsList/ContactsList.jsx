@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-// Імпортуємо генератор екшену
 import { selectContacts, selectFilter } from 'redux/selectors';
 
 import { deleteContact } from 'redux/operations';
@@ -19,10 +18,9 @@ export const Contacts = () => {
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
-  const visibleContacts = filterContacts();
   return (
     <ul>
-      {visibleContacts.map(({ id, name, phone }) => (
+      {filterContacts().map(({ id, name, phone }) => (
         <li key={id}>
           {name}: {phone}
           <Button

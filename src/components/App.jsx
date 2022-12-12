@@ -7,10 +7,12 @@ import { Wrapper } from './App.styled.js';
 import { Phonebook } from './ContactsForm';
 import { Contacts } from './ContactsList';
 import { Filter } from './Filter';
+
 export const App = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
+
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
